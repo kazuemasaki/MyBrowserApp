@@ -6,11 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private WebView myWebView;
+    private EditText urlText;
 
     private static final String INITIAL_WEBSITE =  "http://dotinstall.com/";
 
@@ -20,9 +22,16 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         myWebView = (WebView) findViewById(R.id.myWebView);
+        urlText = (EditText) findViewById(R.id.urlText);
 
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new WebViewClient());
+        myWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url){
+                getSupportActionBar().setSubtitle(view.getTitle());
+                urlText.setText(url);
+            }
+        });
         myWebView.loadUrl(INITIAL_WEBSITE);
     }
 
