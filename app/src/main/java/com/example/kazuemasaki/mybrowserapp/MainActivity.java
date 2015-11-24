@@ -4,14 +4,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private WebView myWebView;
+
+    private static final String INITIAL_WEBSITE =  "http://dotinstall.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myWebView = (WebView) findViewById(R.id.myWebView);
+
+        myWebView.loadUrl(INITIAL_WEBSITE);
     }
 
     @Override
